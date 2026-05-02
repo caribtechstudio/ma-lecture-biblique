@@ -747,16 +747,17 @@
     <form id="contact-form" onsubmit="handleSubmit(event)">
       <div class="form-group">
         <label class="form-label" for="fname" data-fr="Votre nom" data-en="Your name">Votre nom</label>
-        <input class="form-input" id="fname" type="text" placeholder="Jean Dupont" required />
+        <input class="form-input" id="fname" name="name" type="text" placeholder="Jean Dupont" required />
       </div>
       <div class="form-group">
         <label class="form-label" for="femail" data-fr="Adresse e-mail" data-en="Email address">Adresse e-mail</label>
-        <input class="form-input" id="femail" type="email" placeholder="jean@exemple.com" required />
+        <input class="form-input" id="femail" name="email" type="email" placeholder="jean@exemple.com" required />
       </div>
       <div class="form-group">
         <label class="form-label" for="fmessage" data-fr="Message" data-en="Message">Message</label>
-        <textarea class="form-textarea" id="fmessage" placeholder="Votre message..." required></textarea>
+        <textarea class="form-textarea" id="fmessage" name="message" placeholder="Votre message..." required></textarea>
       </div>
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
       <button type="submit" class="btn-submit" data-fr="Envoyer le message" data-en="Send message">Envoyer le message</button>
       <p id="form-success" style="display:none;text-align:center;color:oklch(68% 0.2 155);font-size:14px;margin-top:16px;"></p>
     </form>
@@ -842,14 +843,46 @@ function toggleFaq(btn) {
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 
-// ── Contact form ──
+// ── Contact form (Formspree) ──
 function handleSubmit(e) {
   e.preventDefault();
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
   const s = document.getElementById('form-success');
-  s.textContent = currentLang === 'fr' ? 'Message envoyé, merci !' : 'Message sent, thank you!';
-  s.style.display = 'block';
-  e.target.reset();
-  setTimeout(() => { s.style.display = 'none'; }, 4000);
+  const originalLabel = submitBtn.textContent;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = currentLang === 'fr' ? 'Envoi…' : 'Sending…';
+
+  fetch('https://formspree.io/f/maqvnlew', {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(res => {
+    if (res.ok) {
+      s.textContent = currentLang === 'fr' ? 'Message envoyé, merci !' : 'Message sent, thank you!';
+      s.style.color = 'oklch(68% 0.2 155)';
+      form.reset();
+    } else {
+      return res.json().then(data => {
+        const msg = data.errors ? data.errors.map(x => x.message).join(', ') :
+          (currentLang === 'fr' ? 'Erreur lors de l\'envoi. Réessayez plus tard.' : 'Submission error. Please try again later.');
+        s.textContent = msg;
+        s.style.color = 'oklch(65% 0.2 25)';
+      });
+    }
+  })
+  .catch(() => {
+    s.textContent = currentLang === 'fr' ? 'Erreur réseau. Vérifiez votre connexion.' : 'Network error. Please check your connection.';
+    s.style.color = 'oklch(65% 0.2 25)';
+  })
+  .finally(() => {
+    s.style.display = 'block';
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalLabel;
+    setTimeout(() => { s.style.display = 'none'; }, 5000);
+  });
 }
 
 // ── Mobile menu ──
