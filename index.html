@@ -269,6 +269,15 @@
       font-family: var(--font); cursor: pointer; transition: opacity .2s, transform .2s; margin-top: 8px;
     }
     .btn-submit:hover { opacity: .88; transform: translateY(-1px); }
+    .subject-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .subject-chip {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;
+      background: var(--card); border: 1px solid var(--border); color: var(--text2);
+      cursor: pointer; transition: all .2s; font-family: var(--font); white-space: nowrap;
+    }
+    .subject-chip:hover { border-color: oklch(65% 0.22 265 / 0.4); color: var(--text); }
+    .subject-chip.selected { background: var(--indigo-soft); border-color: oklch(65% 0.22 265 / 0.5); color: oklch(82% 0.15 265); }
 
     /* FOOTER */
     footer {
@@ -705,10 +714,20 @@
   <div class="contact-wrap reveal">
     <div class="contact-header">
       <span class="section-tag" data-fr="Contact" data-en="Contact">Contact</span>
-      <h2 class="section-title" data-fr="Une question ? Un retour ?" data-en="A question? Feedback?">Une question ? Un retour ?</h2>
-      <p class="section-subtitle" style="margin:0 auto;text-align:center;" data-fr="N'hésitez pas à nous écrire. Nous lisons chaque message." data-en="Don't hesitate to write to us. We read every message.">N'hésitez pas à nous écrire. Nous lisons chaque message.</p>
+      <h2 class="section-title" data-fr="Un souci ? Une idée ? Écrivez-moi." data-en="An issue? An idea? Write to me.">Un souci ? Une idée ? Écrivez-moi.</h2>
+      <p class="section-subtitle" style="margin:0 auto;text-align:center;" data-fr="Je prends le temps de lire et de répondre à chaque message." data-en="I take the time to read and reply to every message.">Je prends le temps de lire et de répondre à chaque message.</p>
     </div>
     <form id="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label class="form-label" data-fr="Votre message concerne" data-en="Your message is about">Votre message concerne</label>
+        <div class="subject-chips">
+          <button type="button" class="subject-chip selected" onclick="selectChip(this)" data-value="Problème">🐛 <span data-fr="Problème" data-en="Bug / Issue">Problème</span></button>
+          <button type="button" class="subject-chip" onclick="selectChip(this)" data-value="Question">❓ <span data-fr="Question" data-en="Question">Question</span></button>
+          <button type="button" class="subject-chip" onclick="selectChip(this)" data-value="Suggestion">💡 <span data-fr="Suggestion d'amélioration" data-en="Improvement idea">Suggestion d'amélioration</span></button>
+          <button type="button" class="subject-chip" onclick="selectChip(this)" data-value="Autre">💬 <span data-fr="Autre" data-en="Other">Autre</span></button>
+        </div>
+        <input type="hidden" name="subject" id="fsubject" value="Problème" />
+      </div>
       <div class="form-group">
         <label class="form-label" for="fname" data-fr="Votre nom" data-en="Your name">Votre nom</label>
         <input class="form-input" id="fname" name="name" type="text" placeholder="Jean Dupont" required />
@@ -763,6 +782,13 @@ function setLang(lang) {
   const privacy = document.getElementById('privacy-link');
   if (privacy) privacy.href = lang === 'fr' ? 'fr.html' : 'en.html';
   document.documentElement.lang = lang;
+}
+
+// ── Subject chips ──
+function selectChip(btn) {
+  btn.closest('.subject-chips').querySelectorAll('.subject-chip').forEach(c => c.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('fsubject').value = btn.dataset.value;
 }
 
 // ── FAQ ──
