@@ -57,9 +57,9 @@
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo-icon {
       width: 32px; height: 32px; border-radius: 8px;
-      background: linear-gradient(135deg, var(--indigo), var(--purple));
-      display: flex; align-items: center; justify-content: center; font-size: 16px;
+      overflow: hidden; flex-shrink: 0;
     }
+    .nav-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .nav-logo-text { font-size: 15px; font-weight: 600; color: var(--text); }
     .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
     .nav-links a { font-size: 14px; color: var(--text2); text-decoration: none; transition: color .2s; }
@@ -276,7 +276,8 @@
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
     }
     .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .footer-logo-icon { width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, var(--indigo), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .footer-logo-icon { width: 28px; height: 28px; border-radius: 7px; overflow: hidden; flex-shrink: 0; }
+    .footer-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .footer-logo-text { font-size: 14px; font-weight: 600; color: var(--text); }
     .footer-links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
     .footer-links a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color .2s; }
@@ -291,6 +292,54 @@
       color: oklch(75% 0.18 265); margin: 28px 0 12px; padding-left: 4px;
     }
     .faq-cat-title:first-of-type { margin-top: 8px; }
+
+    /* DONATE */
+    .donate-section { background: var(--bg2); }
+    .donate-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
+    .donate-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+      padding: clamp(36px, 6vw, 56px) clamp(28px, 5vw, 48px);
+      position: relative; overflow: hidden;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .donate-card:hover { border-color: oklch(65% 0.22 265 / 0.3); box-shadow: 0 0 60px oklch(65% 0.22 265 / 0.06); }
+    .donate-card-glow {
+      position: absolute; width: 300px; height: 300px; border-radius: 50%;
+      top: -80px; left: 50%; transform: translateX(-50%);
+      background: radial-gradient(circle, oklch(65% 0.22 265 / 0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .donate-icon {
+      width: 56px; height: 56px; border-radius: 18px; margin: 0 auto 20px;
+      background: linear-gradient(135deg, oklch(65% 0.22 265 / 0.2), oklch(62% 0.22 290 / 0.2));
+      border: 1px solid oklch(65% 0.22 265 / 0.25);
+      display: flex; align-items: center; justify-content: center; font-size: 26px;
+    }
+    .donate-title {
+      font-size: clamp(22px, 3vw, 30px); font-weight: 800; letter-spacing: -1px;
+      color: var(--text); margin-bottom: 12px;
+    }
+    .donate-desc {
+      font-size: 15px; color: var(--text2); line-height: 1.7;
+      max-width: 480px; margin: 0 auto 32px;
+    }
+    .btn-paypal {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 32px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--indigo), var(--purple));
+      color: #fff; text-decoration: none; font-weight: 700; font-size: 15px;
+      transition: opacity .2s, transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 24px oklch(65% 0.22 265 / 0.3);
+      position: relative;
+    }
+    .btn-paypal:hover { opacity: .9; transform: translateY(-3px); box-shadow: 0 14px 32px oklch(65% 0.22 265 / 0.4); }
+    .donate-note { font-size: 12px; color: var(--text3); margin-top: 20px; }
+    .donate-amounts { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .donate-amount {
+      padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      background: var(--bg3); border: 1px solid var(--border); color: var(--text2);
+    }
+
     /* Scroll reveal */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.visible { opacity: 1; transform: none; }
@@ -301,13 +350,14 @@
 <!-- NAV -->
 <nav>
   <a href="#home" class="nav-logo">
-    <div class="nav-logo-icon">📖</div>
+    <div class="nav-logo-icon"><img src="img/icon.png" alt="Ma Lecture Biblique" /></div>
     <span class="nav-logo-text" data-fr="Ma Lecture Biblique" data-en="My Bible Reading">Ma Lecture Biblique</span>
   </a>
   <ul class="nav-links">
     <li><a href="#features" data-fr="Fonctionnalités" data-en="Features">Fonctionnalités</a></li>
     <li><a href="#screenshots" data-fr="Aperçu" data-en="Preview">Aperçu</a></li>
     <li><a href="#faq" data-fr="FAQ" data-en="FAQ">FAQ</a></li>
+    <li><a href="#donate" data-fr="Soutenir" data-en="Support">Soutenir</a></li>
     <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
     <li>
       <div class="lang-switch">
@@ -506,24 +556,31 @@
     <div class="faq-header reveal">
       <span class="section-tag" data-fr="Questions fréquentes" data-en="Frequently asked">Questions fréquentes</span>
       <h2 class="section-title" data-fr="Vous avez des questions ?" data-en="Got questions?">Vous avez des questions ?</h2>
-      <p class="section-subtitle" data-fr="Les réponses essentielles, telles qu'on les retrouve dans l'aide intégrée à l'application." data-en="The essential answers, as found in the in-app help.">Les réponses essentielles, telles qu'on les retrouve dans l'aide intégrée à l'application.</p>
+      <p class="section-subtitle" data-fr="Tout ce qu'il faut savoir avant de télécharger l'application." data-en="Everything you need to know before downloading the app.">Tout ce qu'il faut savoir avant de télécharger l'application.</p>
     </div>
 
-    <h3 class="faq-cat-title" data-fr="Pour bien commencer" data-en="Getting started">Pour bien commencer</h3>
+    <h3 class="faq-cat-title" data-fr="L'application" data-en="The app">L'application</h3>
     <div class="faq-list">
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Par où commencer ?" data-en="Where should I start?">Par où commencer ?</span>
+          <span data-fr="Sur quel appareil fonctionne l'application ?" data-en="What device does the app run on?">Sur quel appareil fonctionne l'application ?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
-        <div class="faq-a"><p data-fr="Si vous débutez la lecture de la Bible, ouvrez l'application, créez un programme adapté à votre rythme dans l'onglet Objectifs et lancez-vous. Une vidéo d'introduction est proposée avant chaque livre biblique pour situer le contexte et les thèmes principaux." data-en="If you're new to Bible reading, open the app, create a program that fits your pace in the Goals tab, and get started. A short intro video is offered before each Bible book to set the context and main themes.">Si vous débutez la lecture de la Bible, ouvrez l'application, créez un programme adapté à votre rythme dans l'onglet Objectifs et lancez-vous. Une vidéo d'introduction est proposée avant chaque livre biblique pour situer le contexte et les thèmes principaux.</p></div>
+        <div class="faq-a"><p data-fr="L'application est universelle : elle fonctionne sur iPhone et iPad (iOS). Une version Android est envisagée pour l'avenir." data-en="The app is universal: it runs on both iPhone and iPad (iOS). An Android version is being considered for the future.">L'application est universelle : elle fonctionne sur iPhone et iPad (iOS). Une version Android est envisagée pour l'avenir.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="À quoi servent les vidéos d'introduction ?" data-en="What are the per-book intro videos for?">À quoi servent les vidéos d'introduction ?</span>
+          <span data-fr="L'application fonctionne-t-elle sans connexion ?" data-en="Does the app work without an internet connection?">L'application fonctionne-t-elle sans connexion ?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
-        <div class="faq-a"><p data-fr="Avant chaque livre biblique, une courte vidéo d'introduction présente le contexte, l'auteur et les thèmes principaux. Elle s'affiche automatiquement la première fois que vous abordez le livre, et l'app retient celles que vous avez vues." data-en="Before each Bible book, a short intro video covers the context, author and main themes. It appears automatically the first time you open the book, and the app remembers which ones you've watched.">Avant chaque livre biblique, une courte vidéo d'introduction présente le contexte, l'auteur et les thèmes principaux. Elle s'affiche automatiquement la première fois que vous abordez le livre, et l'app retient celles que vous avez vues.</p></div>
+        <div class="faq-a"><p data-fr="Oui, entièrement. Toutes les données — sessions, statistiques, progression — sont stockées localement. Aucune connexion n'est requise pour l'utiliser au quotidien." data-en="Yes, entirely. All data — sessions, statistics, progress — is stored locally. No connection is required for daily use.">Oui, entièrement. Toutes les données — sessions, statistiques, progression — sont stockées localement. Aucune connexion n'est requise pour l'utiliser au quotidien.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span data-fr="L'application est-elle liée à JW Library ?" data-en="Is the app linked to JW Library?">L'application est-elle liée à JW Library ?</span>
+          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="faq-a"><p data-fr="Ma Lecture Biblique est un projet indépendant, sans affiliation officielle. L'app peut ouvrir un verset directement dans JW Library d'un seul tap, et fonctionne aussi de manière autonome." data-en="My Bible Reading is an independent project with no official affiliation. The app can open a verse directly in JW Library with one tap, and also works on its own.">Ma Lecture Biblique est un projet indépendant, sans affiliation officielle. L'app peut ouvrir un verset directement dans JW Library d'un seul tap, et fonctionne aussi de manière autonome.</p></div>
       </div>
     </div>
 
@@ -566,156 +623,63 @@
       </div>
     </div>
 
-    <h3 class="faq-cat-title" data-fr="Enregistrer mes lectures" data-en="Recording my readings">Enregistrer mes lectures</h3>
-    <div class="faq-list">
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Comment enregistrer une session de lecture ?" data-en="How do I record a reading session?">Comment enregistrer une session de lecture ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Appuyez sur le bouton + au centre de la barre de navigation. Choisissez le livre et le chapitre de départ, puis ceux de fin. Confirmez et appuyez sur Enregistrer." data-en="Tap the + button in the center of the navigation bar. Select the starting book and chapter, then the ending ones. Confirm and tap Save.">Appuyez sur le bouton + au centre de la barre de navigation. Choisissez le livre et le chapitre de départ, puis ceux de fin. Confirmez et appuyez sur Enregistrer.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Comment modifier ou supprimer une session ?" data-en="How do I edit or delete a session?">Comment modifier ou supprimer une session ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Dans l'onglet Objectifs, appuyez sur la session concernée dans l'historique. La fiche d'édition s'ouvre : modifiez les champs ou faites défiler vers le bas pour la supprimer." data-en="In the Goals tab, tap the session in the history. The edit form opens: modify the fields or scroll down to delete it.">Dans l'onglet Objectifs, appuyez sur la session concernée dans l'historique. La fiche d'édition s'ouvre : modifiez les champs ou faites défiler vers le bas pour la supprimer.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Comment les versets et chapitres sont-ils comptés ?" data-en="How are verses and chapters counted?">Comment les versets et chapitres sont-ils comptés ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="L'application utilise une base complète de la Bible. Elle compte tous les versets couverts par votre session, livre par livre. Les chapitres partiellement lus sont comptés en versets mais pas comme chapitres entiers." data-en="The app uses a complete Bible database. It counts all verses covered by your session, book by book. Partially read chapters are counted as verses but not as complete chapters.">L'application utilise une base complète de la Bible. Elle compte tous les versets couverts par votre session, livre par livre. Les chapitres partiellement lus sont comptés en versets mais pas comme chapitres entiers.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Puis-je enregistrer une lecture passée ?" data-en="Can I record a past reading?">Puis-je enregistrer une lecture passée ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Oui. Dans le formulaire d'ajout, le champ Date est modifiable : choisissez n'importe quelle date passée et la session sera correctement intégrée à vos statistiques." data-en="Yes. In the add form, the Date field is editable: choose any past date and the session will be correctly included in your statistics.">Oui. Dans le formulaire d'ajout, le champ Date est modifiable : choisissez n'importe quelle date passée et la session sera correctement intégrée à vos statistiques.</p></div>
-      </div>
-    </div>
-
-    <h3 class="faq-cat-title" data-fr="Lecture Vie Chrétienne" data-en="Christian Life reading">Lecture Vie Chrétienne</h3>
+    <h3 class="faq-cat-title" data-fr="Fonctionnalités clés" data-en="Key features">Fonctionnalités clés</h3>
     <div class="faq-list">
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
           <span data-fr="Qu'est-ce que la lecture Vie Chrétienne ?" data-en="What is the Christian Life reading?">Qu'est-ce que la lecture Vie Chrétienne ?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
-        <div class="faq-a"><p data-fr="Chaque semaine, l'application affiche automatiquement la portion biblique prévue dans le programme de la réunion Vie Chrétienne. Rien à configurer : la portion de la semaine apparaît sur l'écran d'accueil et se met à jour seule." data-en="Each week, the app automatically displays the Bible portion scheduled for the Christian Life meeting. Nothing to configure: the current week's portion appears on the home screen and updates on its own.">Chaque semaine, l'application affiche automatiquement la portion biblique prévue dans le programme de la réunion Vie Chrétienne. Rien à configurer : la portion de la semaine apparaît sur l'écran d'accueil et se met à jour seule.</p></div>
+        <div class="faq-a"><p data-fr="Chaque semaine, l'application affiche automatiquement la portion biblique prévue dans le programme de la réunion Vie Chrétienne. Rien à configurer : la portion de la semaine apparaît sur l'écran d'accueil et se met à jour seule. Elle reste disponible hors ligne grâce au cache intégré." data-en="Each week, the app automatically displays the Bible portion scheduled for the Christian Life meeting. Nothing to configure: the current week's portion appears on the home screen and updates on its own. It stays available offline thanks to the built-in cache.">Chaque semaine, l'application affiche automatiquement la portion biblique prévue dans le programme de la réunion Vie Chrétienne. Rien à configurer : la portion de la semaine apparaît sur l'écran d'accueil et se met à jour seule. Elle reste disponible hors ligne grâce au cache intégré.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="La lecture hebdomadaire fonctionne-t-elle hors ligne ?" data-en="Does the weekly reading work offline?">La lecture hebdomadaire fonctionne-t-elle hors ligne ?</span>
+          <span data-fr="Qu'est-ce que le programme du Mémorial ?" data-en="What is the Memorial program?">Qu'est-ce que le programme du Mémorial ?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
-        <div class="faq-a"><p data-fr="Oui. L'application précharge en cache les portions des prochains fascicules bimestriels. La lecture de la semaine reste disponible sans connexion. Une connexion ponctuelle suffit pour rafraîchir le cache." data-en="Yes. The app preloads upcoming bimonthly issues into cache. The week's reading stays available without a connection. An occasional connection is enough to refresh the cache.">Oui. L'application précharge en cache les portions des prochains fascicules bimestriels. La lecture de la semaine reste disponible sans connexion. Une connexion ponctuelle suffit pour rafraîchir le cache.</p></div>
+        <div class="faq-a"><p data-fr="Un programme spécial couvrant les événements de la dernière semaine de Jésus sur terre, depuis son arrivée à Béthanie jusqu'à sa résurrection. Proposé chaque année pendant la période précédant le Mémorial, avec suivi de progression intégré." data-en="A special program covering the events of Jesus's last week on earth, from his arrival in Bethany to his resurrection. Offered each year during the period leading up to the Memorial, with built-in progress tracking.">Un programme spécial couvrant les événements de la dernière semaine de Jésus sur terre, depuis son arrivée à Béthanie jusqu'à sa résurrection. Proposé chaque année pendant la période précédant le Mémorial, avec suivi de progression intégré.</p></div>
       </div>
-    </div>
-
-    <h3 class="faq-cat-title" data-fr="Objectifs et notifications" data-en="Goals and notifications">Objectifs et notifications</h3>
-    <div class="faq-list">
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Comment définir un objectif quotidien ?" data-en="How do I set a daily goal?">Comment définir un objectif quotidien ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Dans l'onglet Objectifs, ouvrez la carte Objectif quotidien. Activez l'objectif, choisissez le type (versets ou chapitres), la quantité, et un rappel à l'heure de votre choix." data-en="In the Goals tab, open the Daily Goal card. Enable the goal, choose the type (verses or chapters), the quantity, and a reminder at the time of your choice.">Dans l'onglet Objectifs, ouvrez la carte Objectif quotidien. Activez l'objectif, choisissez le type (versets ou chapitres), la quantité, et un rappel à l'heure de votre choix.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Pourquoi je ne reçois pas de notifications ?" data-en="Why am I not receiving notifications?">Pourquoi je ne reçois pas de notifications ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Trois rappels existent : un rappel quotidien avec la portion du jour, un rappel du soir adaptatif (encourageant à partir de 3 jours de série) et un résumé hebdomadaire le lundi. Chacun s'active séparément dans Options › Notifications. Vérifiez aussi les autorisations dans Réglages iOS." data-en="Three reminders exist: a daily reminder with the day's portion, an adaptive evening reminder (encouraging from 3-day streaks), and a Monday weekly summary. Each is enabled independently in Options › Notifications. Also check permissions in iOS Settings.">Trois rappels existent : un rappel quotidien avec la portion du jour, un rappel du soir adaptatif (encourageant à partir de 3 jours de série) et un résumé hebdomadaire le lundi. Chacun s'active séparément dans Options › Notifications. Vérifiez aussi les autorisations dans Réglages iOS.</p></div>
-      </div>
-    </div>
-
-    <h3 class="faq-cat-title" data-fr="Série, défis et badges" data-en="Streak, challenges and badges">Série, défis et badges</h3>
-    <div class="faq-list">
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
           <span data-fr="Qu'est-ce que la série (streak) ?" data-en="What is the streak?">Qu'est-ce que la série (streak) ?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
-        <div class="faq-a"><p data-fr="La série représente le nombre de jours consécutifs avec au moins une session enregistrée. Elle est visible dans Objectifs, Statistiques et Défis." data-en="The streak is the number of consecutive days with at least one recorded session. Visible in Goals, Statistics and Challenges.">La série représente le nombre de jours consécutifs avec au moins une session enregistrée. Elle est visible dans Objectifs, Statistiques et Défis.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Comment fonctionnent les défis ?" data-en="How do challenges work?">Comment fonctionnent les défis ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Les défis suivent votre série de jours consécutifs (7, 14, 30 jours…). La barre de progression se met à jour automatiquement et le défi est marqué comme accompli au passage du seuil." data-en="Challenges follow your consecutive-day streak (7, 14, 30 days…). The progress bar updates automatically and the challenge is marked completed when the threshold is reached.">Les défis suivent votre série de jours consécutifs (7, 14, 30 jours…). La barre de progression se met à jour automatiquement et le défi est marqué comme accompli au passage du seuil.</p></div>
+        <div class="faq-a"><p data-fr="La série représente le nombre de jours consécutifs avec au moins une session enregistrée. Elle alimente vos défis (7, 14, 30 jours…) et débloque des badges de régularité. Visible dans Objectifs, Statistiques et Défis." data-en="The streak is the number of consecutive days with at least one recorded session. It feeds your challenges (7, 14, 30 days…) and unlocks consistency badges. Visible in Goals, Statistics and Challenges.">La série représente le nombre de jours consécutifs avec au moins une session enregistrée. Elle alimente vos défis (7, 14, 30 jours…) et débloque des badges de régularité. Visible dans Objectifs, Statistiques et Défis.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
           <span data-fr="Comment se débloquent les badges ?" data-en="How do badges unlock?">Comment se débloquent les badges ?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
-        <div class="faq-a"><p data-fr="Plus de 100 badges se débloquent automatiquement selon votre activité : premières sessions, séries de jours, volumes lus, sections bibliques complétées, programmes terminés, lectures spéciales. Une fois débloqué, un badge reste acquis." data-en="Over 100 badges unlock automatically based on your activity: first sessions, day streaks, volumes read, completed Bible sections, finished programs, special readings. Once unlocked, a badge stays earned.">Plus de 100 badges se débloquent automatiquement selon votre activité : premières sessions, séries de jours, volumes lus, sections bibliques complétées, programmes terminés, lectures spéciales. Une fois débloqué, un badge reste acquis.</p></div>
+        <div class="faq-a"><p data-fr="Plus de 100 badges se débloquent automatiquement selon votre activité : premières sessions, séries de jours, volumes lus, sections bibliques complétées, programmes terminés, lectures spéciales. Certains restent secrets jusqu'au déclic. Une fois débloqué, un badge reste acquis." data-en="Over 100 badges unlock automatically based on your activity: first sessions, day streaks, volumes read, completed Bible sections, finished programs, special readings. Some stay secret until you trigger them. Once unlocked, a badge stays earned.">Plus de 100 badges se débloquent automatiquement selon votre activité : premières sessions, séries de jours, volumes lus, sections bibliques complétées, programmes terminés, lectures spéciales. Certains restent secrets jusqu'au déclic. Une fois débloqué, un badge reste acquis.</p></div>
       </div>
     </div>
 
-    <h3 class="faq-cat-title" data-fr="Programme du Mémorial" data-en="Memorial program">Programme du Mémorial</h3>
-    <div class="faq-list">
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Qu'est-ce que le programme du Mémorial ?" data-en="What is the Memorial program?">Qu'est-ce que le programme du Mémorial ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Un programme spécial couvrant les événements de la dernière semaine de Jésus sur terre, depuis son arrivée à Béthanie jusqu'à sa résurrection. Proposé chaque année pendant la période précédant le Mémorial." data-en="A special program covering the events of Jesus's last week on earth, from his arrival in Bethany to his resurrection. Offered each year during the period leading up to the Memorial.">Un programme spécial couvrant les événements de la dernière semaine de Jésus sur terre, depuis son arrivée à Béthanie jusqu'à sa résurrection. Proposé chaque année pendant la période précédant le Mémorial.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Comment activer le programme du Mémorial ?" data-en="How do I enable the Memorial program?">Comment activer le programme du Mémorial ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Dans Options › Programme spécial, activez Lecture du Mémorial. La carte du programme apparaît dans l'onglet Objectifs pendant la période concernée." data-en="In Options › Special Program, enable Memorial Reading. The program card appears in the Goals tab during the relevant period.">Dans Options › Programme spécial, activez Lecture du Mémorial. La carte du programme apparaît dans l'onglet Objectifs pendant la période concernée.</p></div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<section id="donate" class="donate-section">
+  <div class="max-w">
+    <div class="donate-wrap reveal">
+      <div class="donate-card">
+        <div class="donate-card-glow"></div>
+        <div class="donate-icon">🤍</div>
+        <h2 class="donate-title" data-fr="Soutenir le projet" data-en="Support the project">Soutenir le projet</h2>
+        <p class="donate-desc" data-fr="Ma Lecture Biblique est une application gratuite, sans publicité, développée avec passion pendant mon temps libre. Si elle vous est utile et que vous souhaitez contribuer à son évolution, un don — même modeste — fait une vraie différence." data-en="My Bible Reading is a free, ad-free app developed with passion in my spare time. If it's been useful to you and you'd like to contribute to its development, a donation — even a small one — makes a real difference.">Ma Lecture Biblique est une application gratuite, sans publicité, développée avec passion pendant mon temps libre. Si elle vous est utile et que vous souhaitez contribuer à son évolution, un don — même modeste — fait une vraie différence.</p>
+        <div class="donate-amounts">
+          <span class="donate-amount">2 €</span>
+          <span class="donate-amount">5 €</span>
+          <span class="donate-amount">10 €</span>
+          <span class="donate-amount" data-fr="Le montant de votre choix" data-en="Any amount">Le montant de votre choix</span>
+        </div>
+        <a href="https://paypal.me/shadowtechstudio?locale.x=fr_FR&country.x=FR" target="_blank" rel="noopener noreferrer" class="btn-paypal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.99l-.285 1.809c-.036.234.15.443.39.443h3.297c.46 0 .85-.334.922-.788l.038-.197.733-4.649.047-.257a.932.932 0 0 1 .92-.789h.58c3.76 0 6.705-1.528 7.562-5.949.36-1.847.174-3.388-.49-4.543z"/></svg>
+          <span data-fr="Faire un don via PayPal" data-en="Donate via PayPal">Faire un don via PayPal</span>
+        </a>
+        <p class="donate-note" data-fr="Vous serez redirigé vers PayPal. Le don reste libre et sans contrepartie." data-en="You'll be redirected to PayPal. The donation is entirely optional and comes with no obligation.">Vous serez redirigé vers PayPal. Le don reste libre et sans contrepartie.</p>
       </div>
     </div>
-
-    <h3 class="faq-cat-title" data-fr="Sauvegarde et confidentialité" data-en="Backup and privacy">Sauvegarde et confidentialité</h3>
-    <div class="faq-list">
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="L'application fonctionne-t-elle sans connexion ?" data-en="Does the app work without an internet connection?">L'application fonctionne-t-elle sans connexion ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Oui, entièrement. Toutes les données — sessions, statistiques, progression — sont stockées localement. Aucune connexion n'est requise pour l'utiliser au quotidien." data-en="Yes, entirely. All data — sessions, statistics, progress — is stored locally. No connection is required for daily use.">Oui, entièrement. Toutes les données — sessions, statistiques, progression — sont stockées localement. Aucune connexion n'est requise pour l'utiliser au quotidien.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Comment sauvegarder mes données ?" data-en="How do I back up my data?">Comment sauvegarder mes données ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Dans Options › Données, appuyez sur Exporter les données. Un fichier JSON est généré et partagé via le panneau iOS (iCloud Drive, AirDrop, e-mail). Il contient toutes vos sessions et réglages." data-en="In Options › Data, tap Export data. A JSON file is generated and shared via the iOS panel (iCloud Drive, AirDrop, email). It contains all your sessions and settings.">Dans Options › Données, appuyez sur Exporter les données. Un fichier JSON est généré et partagé via le panneau iOS (iCloud Drive, AirDrop, e-mail). Il contient toutes vos sessions et réglages.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Mes données sont-elles perdues si je supprime l'app ?" data-en="Is my data lost if I delete the app?">Mes données sont-elles perdues si je supprime l'app ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Oui — les données sont locales. Pensez à exporter régulièrement une sauvegarde via Options › Données pour ne rien perdre en cas de réinstallation ou de changement d'appareil." data-en="Yes — data is local. Remember to regularly export a backup via Options › Data to avoid losing anything in case of reinstallation or device change.">Oui — les données sont locales. Pensez à exporter régulièrement une sauvegarde via Options › Données pour ne rien perdre en cas de réinstallation ou de changement d'appareil.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="Sur quel appareil fonctionne l'application ?" data-en="What device does the app run on?">Sur quel appareil fonctionne l'application ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="L'application est universelle : elle fonctionne sur iPhone et iPad (iOS). Une version Android est envisagée pour l'avenir." data-en="The app is universal: it runs on both iPhone and iPad (iOS). An Android version is being considered for the future.">L'application est universelle : elle fonctionne sur iPhone et iPad (iOS). Une version Android est envisagée pour l'avenir.</p></div>
-      </div>
-      <div class="faq-item reveal">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-fr="L'application est-elle liée à JW Library ?" data-en="Is the app linked to JW Library?">L'application est-elle liée à JW Library ?</span>
-          <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
-        </button>
-        <div class="faq-a"><p data-fr="Ma Lecture Biblique est un projet indépendant, sans affiliation officielle. L'app peut ouvrir un verset directement dans JW Library d'un seul tap, et fonctionne aussi de manière autonome." data-en="My Bible Reading is an independent project with no official affiliation. The app can open a verse directly in JW Library with one tap, and also works on its own.">Ma Lecture Biblique est un projet indépendant, sans affiliation officielle. L'app peut ouvrir un verset directement dans JW Library d'un seul tap, et fonctionne aussi de manière autonome.</p></div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -767,13 +731,14 @@
 <!-- FOOTER -->
 <footer>
   <a href="#home" class="footer-logo">
-    <div class="footer-logo-icon">📖</div>
+    <div class="footer-logo-icon"><img src="img/icon.png" alt="Ma Lecture Biblique" /></div>
     <span class="footer-logo-text" data-fr="Ma Lecture Biblique" data-en="My Bible Reading">Ma Lecture Biblique</span>
   </a>
   <ul class="footer-links">
     <li><a href="#features" data-fr="Fonctionnalités" data-en="Features">Fonctionnalités</a></li>
     <li><a href="#screenshots" data-fr="Aperçu" data-en="Preview">Aperçu</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a href="#donate" data-fr="Soutenir" data-en="Support">Soutenir</a></li>
     <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
     <li><a href="fr.html" id="privacy-link" data-fr="Confidentialité" data-en="Privacy">Confidentialité</a></li>
   </ul>
